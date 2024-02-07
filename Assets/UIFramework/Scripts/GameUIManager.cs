@@ -66,9 +66,6 @@ public class GameUIManager : MonoSingleton<GameUIManager>
             {
                 ProcessUIOnTop();
             }
-            // 处理货币栏变化
-            ChangeMoneyType();
-
             return sb;
         }
         sb = (ScreenBase)Activator.CreateInstance(type, param);
@@ -81,10 +78,6 @@ public class GameUIManager : MonoSingleton<GameUIManager>
         {
             ProcessUIOnTop();
         }
-
-        // 处理货币栏变化
-        ChangeMoneyType();
-
         return sb;
     }
 
@@ -182,9 +175,6 @@ public class GameUIManager : MonoSingleton<GameUIManager>
         {
             ProcessUIOnTop();
         }
-
-        // 处理货币栏变化
-        ChangeMoneyType();
     }
 
     // 处理最上层的界面逻辑
@@ -249,36 +239,6 @@ public class GameUIManager : MonoSingleton<GameUIManager>
             }
         }
     }
-
-    void ChangeMoneyType()
-    {
-        sortTemp.Clear();
-        foreach (var s in mTypeScreens.Values)
-        {
-            sortTemp.Add(s);
-        }
-        // 排序 按照层级高->低的顺序
-        sortTemp.Sort(
-            (a, b) =>
-            {
-                if (a.mSortingLayer == b.mSortingLayer)
-                {
-                    return b.mOpenOrder.CompareTo(a.mOpenOrder);
-                }
-                return b.mSortingLayer.CompareTo(a.mSortingLayer);
-            });
-
-        // 找到第一个关心货币栏的
-        for (int i = 0; i < sortTemp.Count; i++)
-        {
-            if (sortTemp[i].CtrlBase.mBCareAboutMoney)
-            {
-                EventManager.OnMoneyTypeChange.BroadCastEvent(sortTemp[i].CtrlBase.MoneyType);
-                break;
-            }
-        }
-    }
-
 
     //返回登陆界面时，重置常驻UI的状态
     public void Reset()

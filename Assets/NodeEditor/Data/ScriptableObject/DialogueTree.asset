@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03deab5c6591dbe4fa5ae31bd7cedfee, type: 3}
   m_Name: RootDialogue
   m_EditorClassIdentifier: 
-  state: 0
-  started: 1
+  state: 3
+  started: 0
   guid: a6bf5582fd25aa94a8da04770201c6a7
   position: {x: 0, y: -24.8}
   description: 
@@ -114,7 +114,7 @@ MonoBehaviour:
   - "\u5BF9\u7684\uFF0C\u6211\u6765\u627E\u96C5\u5178\u5A1C\u7684\uFF01"
   - "\u4F60\u8BA4\u8BC6\u4E00\u4E2AUp\u4E3B\u53EB\u65E5\u9189\u591C\u7684\u72D7\u5417\uFF1F"
   - "\u4E0D\uFF0C\u6211\u662F\u6765\u70B9\u8D5E\u7684\uFF01"
-  nextDialogueIndex: 2
+  nextDialogueIndex: 1
   nextDialogueStart: 0
 --- !u!114 &8847542613694569250
 MonoBehaviour:
@@ -152,7 +152,7 @@ MonoBehaviour:
   state: 3
   started: 0
   guid: 0fee5463eb9bfd44dbba92e87ed1aff2
-  position: {x: 0, y: 125.000015}
+  position: {x: 0, y: 125}
   description: 
   child: {fileID: 7843189067690890120}
   dialogueContent: "\u6211\u662F\u5B99\u65AF\uFF0C\u6211\u8D1F\u8D23\u638C\u7BA1\u7740\u4E86\u7684\u4E00\u5207"
