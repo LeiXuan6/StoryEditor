@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu()]
+[CreateAssetMenu(menuName = "StoryLine")]
 public class DialogueTree : NodeTree
 {
 

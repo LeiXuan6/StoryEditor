@@ -23,15 +23,15 @@ public class DialogueManager : MonoBehaviour
         }
         dialogueContentText.text = dialogueContent;
     }
-    public void generateOptions(List<string> optionList,BranchDialogue branchDialogue){
+    public void generateOptions(List<string> optionList,BranchLine branchLine){
         for(int i = 1;i <= optionList.Count;i++){
             float offset = 800 / (optionList.Count+1);
             float rectPositionY = 400 - i * offset;
-            generateButton(i,rectPositionY,optionList,branchDialogue);
+            generateButton(i,rectPositionY,optionList,branchLine);
         }
     }
     // 即时生成按钮
-    private void generateButton(int index,float rectPositionY,List<string> optionList,BranchDialogue branchDialogue){
+    private void generateButton(int index,float rectPositionY,List<string> optionList,BranchLine branchLine){
         DefaultControls.Resources uiResources = new DefaultControls.Resources();
 
         GameObject optionGameObject = DefaultControls.CreateButton(uiResources);
@@ -43,7 +43,7 @@ public class DialogueManager : MonoBehaviour
         optionRectTransform.anchoredPosition = new Vector2(0,rectPositionY);
 
         Button optionButton = optionGameObject.GetComponent<Button>();
-        optionButton.onClick.AddListener(() => ReturnNextDialogue(index,branchDialogue));
+        optionButton.onClick.AddListener(() => ReturnNextDialogue(index,branchLine));
         
         Outline outline = optionGameObject.AddComponent<Outline>();
         outline.effectDistance = new Vector2(5,5);
@@ -54,12 +54,12 @@ public class DialogueManager : MonoBehaviour
         optionContent.fontStyle = FontStyle.Bold;
         optionContent.fontSize = 30;
     }
-    private void ReturnNextDialogue(int index,BranchDialogue branchDialogue){
-        branchDialogue.nextDialogueStart = true;
-        branchDialogue.nextDialogueIndex = index-1;
+    private void ReturnNextDialogue(int index,BranchLine branchLine){
+        branchLine.nextDialogueStart = true;
+        branchLine.nextDialogueIndex = index-1;
     }
-    public void SelectStop(BranchDialogue branchDialogue){
-        branchDialogue.nextDialogueStart = false;
+    public void SelectStop(BranchLine branchLine){
+        branchLine.nextDialogueStart = false;
         Button[] optionObjectList = GameObject.Find("UI").transform.Find("DialogueUI/OptionList").GetComponentsInChildren<Button>();
         foreach(var optionObject in optionObjectList){
             Destroy(optionObject.gameObject);

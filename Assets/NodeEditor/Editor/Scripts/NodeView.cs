@@ -66,7 +66,7 @@ public class NodeView : UnityEditor.Experimental.GraphView.Node
         }
 
         if(output != null){
-            output.portName = "";
+            output.portName = "Next Line";
             // 因为output端口的label默认是在端口左边边因此需要将排列方式调整为竖向自下往上
             output.style.flexDirection = FlexDirection.ColumnReverse;
             outputContainer.Add(output);

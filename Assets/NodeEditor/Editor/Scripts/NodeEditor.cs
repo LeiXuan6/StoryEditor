@@ -8,11 +8,11 @@ public class NodeEditor : EditorWindow
     NodeTreeViewer nodeTreeViewer;
     InspectorViewer inspectorViewer;
     //顶部菜单栏层级命名
-    [MenuItem("JayToolkit/NodeEditor")]
+    [MenuItem("GameTools/StoryLine")]
     public static void OpenWindow()
     {
         NodeEditor wnd = GetWindow<NodeEditor>();
-        wnd.titleContent = new GUIContent("NodeEditor");
+        wnd.titleContent = new GUIContent("StoryEditor");
     }
     // 双击资源文件时自动打开一个编辑器窗口
     [OnOpenAsset]

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class RootDialogue : RootNode
+public class RootLine : RootNode
 {
     [TextArea] public string dialogueContent;
     public Sprite speakerAvatar;
