@@ -11,6 +11,7 @@ public class NodeView : UnityEditor.Experimental.GraphView.Node
     public Node node;
     public Port input;
     public Port output;
+    public Port action;
     public NodeView(Node node) : base("Assets/NodeEditor/Editor/UI/NodeView.uxml"){
         this.node = node;
         this.title = node.name;
@@ -21,6 +22,7 @@ public class NodeView : UnityEditor.Experimental.GraphView.Node
 
         CreateInputPorts();
         CreateOutputPorts();
+        CreateActionPorts();
         SetupClass();
 
         // 添加Label组件在节点视图层
@@ -71,6 +73,14 @@ public class NodeView : UnityEditor.Experimental.GraphView.Node
             output.style.flexDirection = FlexDirection.ColumnReverse;
             outputContainer.Add(output);
         }
+    }
+    
+    private void CreateActionPorts()
+    {
+        // 默认所有节点为单出口类型
+        action = InstantiatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Multi, typeof(bool));
+        action.portName = "optionList";
+        outputContainer.Add(action);
     }
     private void SetupClass()
     {
