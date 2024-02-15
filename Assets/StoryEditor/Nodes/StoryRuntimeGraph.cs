@@ -33,13 +33,23 @@ using System.Collections.Generic;
 using System.Linq;
 using GraphProcessor;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace StoryEditor.Nodes
 {
-    public class StoryGraphProcessor : BaseGraphProcessor
+    public interface IStoryRunner
     {
+        void RemoveStory(StoryProcessor processor);
+        void ExecuteStory(StoryProcessor processor);
+    }
+    
+    public class StoryProcessor : BaseGraphProcessor
+    {
+        private static int ID_GEN = 0;
+        public int GUID;
         List<BaseNode> processList;
-        StoryStep4Start startNode;
+        internal StoryStep4Start StartNode;
+        private IStoryRunner storyRunner;
         Dictionary<string, StoryBaseNode> storyNodes;
         Dictionary<string, List<StoryLineNode>> step2Lines;
         Dictionary<string, List<StoryActionNode>> line2Actions;
@@ -48,11 +58,10 @@ namespace StoryEditor.Nodes
         /// Manage graph scheduling and processing
         /// </summary>
         /// <param name="graph">Graph to be processed</param>
-        public StoryGraphProcessor(BaseGraph graph) : base(graph)
+        public StoryProcessor(BaseGraph graph, IStoryRunner storyRunner) : base(graph)
         {
-            storyNodes = new Dictionary<string, StoryBaseNode>();
-            step2Lines = new Dictionary<string, List<StoryLineNode>>();
-            line2Actions = new Dictionary<string, List<StoryActionNode>>();
+            GUID = ++ID_GEN;
+            this.storyRunner = storyRunner;
             InitStoryProcessor(graph);
         }
 
@@ -66,9 +75,10 @@ namespace StoryEditor.Nodes
         /// </summary>
         public override void Run()
         {
-            int count = processList.Count;
-            for (int i = 0; i < count; i++)
-                processList[i].OnProcess();
+            if(storyNodes.TryGetValue(StartNode.CurrentStoryLine, out StoryBaseNode lineNode))
+            {
+                ((StoryLineNode)lineNode).OnProcess();
+            }
         }
         
         #region story
@@ -79,30 +89,41 @@ namespace StoryEditor.Nodes
                 storyNodes.Add(baseNode.GUID, (StoryBaseNode)baseNode);
                 if (baseNode is StoryStep4Start)
                 {
-                    startNode = (StoryStep4Start)baseNode;
+                    StartNode = (StoryStep4Start)baseNode;
                 }
             }
             
-            if (startNode == null)
+            if (StartNode == null)
             {
                 throw new Exception("a start node must be created");
             }
 
-            InitStoryData();
-
-            string currentStoryStep = startNode.CurrentStoryStep;
-            if (string.IsNullOrEmpty(currentStoryStep))
+            if (StartNode.State == StoryState.CLOSE)
             {
-                currentStoryStep = startNode.GUID;
-                startNode.CurrentStoryStep = currentStoryStep;
+                return;
             }
 
-            List<StoryLineNode> storyLineNodes = GetLines(startNode.CurrentStoryStep);
+            StartNode.StoryRunner = this.storyRunner;
+            StartNode.Processor = this;
+            
+            storyNodes = new Dictionary<string, StoryBaseNode>();
+            step2Lines = new Dictionary<string, List<StoryLineNode>>();
+            line2Actions = new Dictionary<string, List<StoryActionNode>>();
+            InitStoryData();
+
+            string currentStoryStep = StartNode.CurrentStoryStep;
+            if (string.IsNullOrEmpty(currentStoryStep))
+            {
+                currentStoryStep = StartNode.GUID;
+                StartNode.CurrentStoryStep = currentStoryStep;
+            }
+
+            List<StoryLineNode> storyLineNodes = GetLines(StartNode.CurrentStoryStep);
             if (storyLineNodes == null)
             {
                 throw new Exception("current step not have line node data");
             }
-            
+ 
             
             Debug.Log("init story graph");
         }
@@ -115,7 +136,7 @@ namespace StoryEditor.Nodes
 
         private void InitStoryData()
         {
-            StoryStepNode current = startNode;
+            StoryStepNode current = StartNode;
             while (current != null)
             {
                 IEnumerable<IStoryNode> lineExecutedNodes = current.GetExecutedNodes();
@@ -125,7 +146,10 @@ namespace StoryEditor.Nodes
                 foreach (StoryLineNode executedNode in lineExecutedNodes)
                 {
                     lines.Add(executedNode);
-
+                    
+                    executedNode.StoryContext = StartNode;
+                    executedNode.Step = current;
+                        
                     IEnumerable<IStoryNode> actionExecutedNodes = executedNode.GetExecutedNodes();
                     List<StoryActionNode> actionList = new List<StoryActionNode>();
                     line2Actions.Add(executedNode.GUID, actionList);
@@ -145,26 +169,93 @@ namespace StoryEditor.Nodes
             }
         }
         
-        #endregion
-    }
-
-    public class StoryRuntimeGraph: MonoBehaviour
-    {
-        public BaseGraph	graph;
-        public StoryGraphProcessor	processor;
-
-        private void Start()
+        public bool Listen(StoryListenType type, StoryListenParam storyListenParam)
         {
-            if (graph != null)
-                processor = new StoryGraphProcessor(graph);
+            if (!string.IsNullOrEmpty(StartNode.CurrentStoryLine))
+            {
+                return false;
+            }
+            
+            List<StoryLineNode> storyLineNodes = GetLines(StartNode.CurrentStoryStep);
+            foreach (StoryLineNode storyLineNode in storyLineNodes)
+            {
+                StoryLineNode listen = storyLineNode.Listen(type, storyListenParam);
+                if (listen != null)
+                {
+                    StartNode.CurrentStoryLine = listen.GUID;
+                    break;
+                }
+            }
+
+            return true;
+        }
+        #endregion
+
+        public override bool Equals(object obj)
+        {
+            if (obj is StoryProcessor)
+            {
+                return false;
+            }
+            return this.GUID == ((StoryProcessor)obj).GUID;
         }
 
+        public override int GetHashCode()
+        {
+            return this.GUID;
+        }
+    }
+
+    public class StoryRuntimeGraph: MonoSingleton<StoryRuntimeGraph>,IStoryRunner
+    {
+        private Dictionary<string, StoryProcessor> storyGraphProcessors = new Dictionary<string, StoryProcessor>();
+        private List<StoryProcessor> executeQueue = new List<StoryProcessor>();
+        protected override void Init()
+        {
+            base.Init();
+            Object[] scriptableObjectArray = Resources.LoadAll("StoryDatas", typeof(ScriptableObject));
+            foreach (var scriptableObject in scriptableObjectArray)
+            {
+                if (scriptableObject is ScriptableObject)
+                {
+                    StoryProcessor storyProcessor = new StoryProcessor((BaseGraph)scriptableObject, this);
+                    storyGraphProcessors.Add(scriptableObject.name, storyProcessor);
+                    Debug.Log("Loaded Story: " + scriptableObject.name);
+                }
+            }
+        }
+ 
+        public void Trigger(StoryListenType type, StoryListenParam param)
+        {
+            foreach (KeyValuePair<string,StoryProcessor> kv in storyGraphProcessors)
+            {
+                bool listen = kv.Value.Listen(type, param);
+                if (listen)
+                {
+                    executeQueue.Add(kv.Value);
+                }
+            }
+        }
+
+      
         void Update()
         {
-            if (graph != null)
+            
+        }
+
+        public void RemoveStory(StoryProcessor processor)
+        {
+            executeQueue.Remove(processor);
+        }
+
+        public void ExecuteStory(StoryProcessor processor)
+        {
+            if (executeQueue.Count == 0)
             {
-                processor.Run();
+                return;
             }
+            
+            executeQueue[0].Run();
         }
     }
 }

@@ -1,5 +1,5 @@
 // Leixuan Libs - Leixuan's Game Lib
-// Copyright 2023 leixuan@pku.org.cn  All rights reserved.
+// Copyright  2023 leixuan@pku.org.cn .  All rights reserved.
 // http://www.inyourcode.com
 //
 // Redistribution and use in source and binary forms, with or without
@@ -29,41 +29,22 @@
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 using System.Collections.Generic;
-using GraphProcessor;
-using NodeGraphProcessor.Examples;
-using UnityEngine;
 
 namespace StoryEditor.Nodes
 {
-    public class StoryActionNode : StoryBaseNode
+    public interface StoryLineListener
     {
-        [Input(name = "Line")]
-        public ConditionalLink	line;
-        public override IEnumerable<IStoryNode> GetExecutedNodes()
-        {
-            return null;
-        }
-
-        public override StoryStepNode NextStep()
-        {
-            return null;
-        }
-
-        public virtual bool ExecuteAction()
-        {
-            return true;
-        }
+        List<StoryLineNode> Listeners(StoryListenType type);
     }
 
-    [System.Serializable, NodeMenuItem("Story/DialogueAction")]
-    public class StoryAction4Dialogue : StoryActionNode
+    public enum StoryListenType
     {
-        [TextArea] 
-        public string dialogueContent;
-        public Sprite speakerAvatar;
-        public string speakerName;
+        ImmediatelyExecEvent,
+    }
+
+    public class StoryListenParam
+    {
         
-        public override string	name => "DialogueAction";
     }
-    
+
 }

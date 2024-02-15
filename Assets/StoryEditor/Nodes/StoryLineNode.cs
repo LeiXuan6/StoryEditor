@@ -41,7 +41,26 @@ namespace StoryEditor.Nodes
         public ConditionalLink	preStep;
         [Output(name = "Actions", allowMultiple = true)]
         public ConditionalLink	actions;
-     
+        [ShowInInspector]
+        public StoryListenType listenType;
+        [ShowInInspector]
+        public int ActionIndex = -1;
+        private List<StoryActionNode> acttionNodes = new List<StoryActionNode>();
+        public IStoryContext StoryContext;
+        public StoryBaseNode Step;
+
+        public override void InitStoryNode()
+        {
+            base.InitStoryNode();
+            IEnumerable<IStoryNode> executedNodes = GetExecutedNodes();
+            foreach (IStoryNode node in executedNodes)
+            {
+                acttionNodes.Add((StoryActionNode)node);
+            }
+
+            acttionNodes.OrderBy(n => n.computeOrder);
+        }
+
         public override IEnumerable<IStoryNode> GetExecutedNodes()
         {
             return outputPorts.FirstOrDefault(n => n.fieldName == nameof(actions))
@@ -51,6 +70,39 @@ namespace StoryEditor.Nodes
         public override StoryStepNode NextStep()
         {
             return null;
+        }
+
+        public StoryLineNode Listen(StoryListenType type, StoryListenParam storyListenParam)
+        {
+            if (listenType != type)
+            {
+                return null;
+            }
+
+            return this;
+        }
+
+        protected override void Process()
+        {
+            base.Process();
+            if (ActionIndex >= 0 && ActionIndex == acttionNodes.Count)
+            {
+                ChangeStep();
+                return;
+            }
+            ActionIndex += 1;
+            acttionNodes[ActionIndex].ExecuteAction();
+        }
+
+        private void ChangeStep()
+        {
+            if (Step is StoryStep4End)
+            {
+                StoryContext.End();
+                return;
+            }
+            
+            StoryContext.ChangeStep(Step.NextStep());
         }
     }
     

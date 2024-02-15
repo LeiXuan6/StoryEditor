@@ -51,5 +51,18 @@ namespace StoryEditor.Nodes
     {
         public abstract IEnumerable<IStoryNode> GetExecutedNodes();
         public abstract StoryStepNode NextStep();
+
+        public virtual void InitStoryNode()
+        {
+            
+        }
+        
+        protected override void Enable()
+        {
+            base.Enable();
+            InitStoryNode();
+        }
+        
+        
     }
 }

@@ -35,6 +35,22 @@ using NodeGraphProcessor.Examples;
 
 namespace StoryEditor.Nodes
 {
+    public enum StoryState
+    {
+        OPEN,
+        CLOSE
+    }
+    
+    public interface IStoryContext
+    {
+        string GetCurrentStoryStep();
+        string GetCurrentStoryLine();
+        StoryState GetState();
+        IStoryRunner GetStoryRunner();
+        void ChangeStep(StoryStepNode nextStep);
+        void End();
+    }
+   
     
     public class StoryStepNode : StoryBaseNode
     {
@@ -63,15 +79,82 @@ namespace StoryEditor.Nodes
              
             return null;
         }
+
+        public List<StoryLineNode> Listeners(StoryListenType type)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 
     [System.Serializable, NodeMenuItem("Story/StartStep")]
-    public class StoryStep4Start : StoryStepNode
+    public class StoryStep4Start : StoryStepNode, IStoryContext
     {
-        internal string CurrentStoryStep;
-        internal string CurrentStoryLine;
-        internal int CurrentStoryAction;
+        [ShowInInspector]
+        public string CurrentStoryStep;
+        [ShowInInspector]
+        public string CurrentStoryLine;
+        [ShowInInspector]
+        public StoryState State = StoryState.OPEN;
+        public IStoryRunner StoryRunner;
+        public StoryProcessor Processor;
         public override string	name => "StartStep";
+
+        public string GetCurrentStoryStep()
+        {
+            return this.CurrentStoryStep;
+        }
+
+        public string GetCurrentStoryLine()
+        {
+            return this.CurrentStoryLine;
+        }
+
+        public StoryState GetState()
+        {
+           return this.State;
+        }
+
+        public IStoryRunner GetStoryRunner()
+        {
+            return this.StoryRunner;
+        }
+
+        public void ChangeStep(StoryStepNode nextStep)
+        {
+            CurrentStoryLine = "";
+            if (nextStep != null)
+            {
+                CurrentStoryStep = nextStep.GUID;
+            }
+            StoryRunner.RemoveStory(Processor);
+        }
+
+        public void End()
+        {
+            State = StoryState.CLOSE;
+        }
+    }
+
+    [System.Serializable, NodeMenuItem("Story/EndStep")]
+    public class StoryStep4End : StoryBaseNode
+    {
+        [Output(name = "Executes", allowMultiple = true)]
+        public ConditionalLink	executes;
+        [Input(name = "Previous Step")]
+        public ConditionalLink preStep;
+        
+        public override IEnumerable<IStoryNode> GetExecutedNodes()
+        {
+            return outputPorts.FirstOrDefault(n => n.fieldName == nameof(executes))
+                .GetEdges().Select(e => e.inputNode as StoryBaseNode);
+        }
+        
+        public override string	name => "EndStep";
+
+        public override StoryStepNode NextStep()
+        {
+            return null;
+        }
     }
     
     [System.Serializable, NodeMenuItem("Story/NormStep")]
