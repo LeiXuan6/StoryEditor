@@ -40,6 +40,11 @@ namespace StoryEditor.Nodes
         OPEN,
         CLOSE
     }
+
+    public interface IStoryUIView
+    {
+        
+    }
     
     public interface IStoryContext
     {
@@ -49,6 +54,11 @@ namespace StoryEditor.Nodes
         IStoryRunner GetStoryRunner();
         void ChangeStep(StoryStepNode nextStep);
         void End();
+        
+        
+        
+        //UI
+        IStoryUIView GetStoryUIView();
     }
    
     
@@ -95,8 +105,10 @@ namespace StoryEditor.Nodes
         public string CurrentStoryLine;
         [ShowInInspector]
         public StoryState State = StoryState.OPEN;
+        
         public IStoryRunner StoryRunner;
         public StoryProcessor Processor;
+        public IStoryUIView StoryUIView;
         public override string	name => "StartStep";
 
         public string GetCurrentStoryStep()
@@ -118,6 +130,11 @@ namespace StoryEditor.Nodes
         {
             return this.StoryRunner;
         }
+        
+        public IStoryUIView GetStoryUIView()
+        {
+            return this.StoryUIView;
+        }
 
         public void ChangeStep(StoryStepNode nextStep)
         {
@@ -133,6 +150,7 @@ namespace StoryEditor.Nodes
         {
             State = StoryState.CLOSE;
         }
+
     }
 
     [System.Serializable, NodeMenuItem("Story/EndStep")]

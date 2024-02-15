@@ -56,13 +56,22 @@ namespace StoryEditor.Nodes
         {
             
         }
+
+        public virtual void OnStoryUpdate()
+        {
+            
+        }
         
         protected override void Enable()
         {
             base.Enable();
             InitStoryNode();
         }
-        
-        
+
+        protected override void Process()
+        {
+            base.Process();
+            OnStoryUpdate();
+        }
     }
 }

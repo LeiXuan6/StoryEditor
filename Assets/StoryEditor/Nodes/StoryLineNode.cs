@@ -35,6 +35,14 @@ using NodeGraphProcessor.Examples;
 
 namespace StoryEditor.Nodes
 {
+    // 对话节点状态枚举值
+    public enum LineNodeState{
+        INIT,
+        RUNNING,
+        WAITTING,
+        END,
+    }
+    
     public class StoryLineNode : StoryBaseNode
     {
         [Input(name = "PreStep")]
@@ -45,6 +53,8 @@ namespace StoryEditor.Nodes
         public StoryListenType listenType;
         [ShowInInspector]
         public int ActionIndex = -1;
+
+        public LineNodeState LineState = LineNodeState.INIT;
         private List<StoryActionNode> acttionNodes = new List<StoryActionNode>();
         public IStoryContext StoryContext;
         public StoryBaseNode Step;
@@ -53,6 +63,10 @@ namespace StoryEditor.Nodes
         {
             base.InitStoryNode();
             IEnumerable<IStoryNode> executedNodes = GetExecutedNodes();
+            if (executedNodes == null)
+            {
+                return;
+            }
             foreach (IStoryNode node in executedNodes)
             {
                 acttionNodes.Add((StoryActionNode)node);
@@ -63,8 +77,12 @@ namespace StoryEditor.Nodes
 
         public override IEnumerable<IStoryNode> GetExecutedNodes()
         {
-            return outputPorts.FirstOrDefault(n => n.fieldName == nameof(actions))
-                .GetEdges().Select(e => e.inputNode as StoryBaseNode);
+            NodePort firstOrDefault = outputPorts.FirstOrDefault(n => n.fieldName == nameof(actions));
+            if (firstOrDefault == null)
+            {
+                return null;
+            }
+            return firstOrDefault.GetEdges().Select(e => e.inputNode as StoryBaseNode);
         }
 
         public override StoryStepNode NextStep()
@@ -79,19 +97,27 @@ namespace StoryEditor.Nodes
                 return null;
             }
 
+            LineState = LineNodeState.RUNNING;
             return this;
         }
 
-        protected override void Process()
+        public override void OnStoryUpdate()
         {
-            base.Process();
             if (ActionIndex >= 0 && ActionIndex == acttionNodes.Count)
             {
                 ChangeStep();
                 return;
             }
+
+            if (LineState != LineNodeState.RUNNING)
+            {
+                return;
+            }
+            
             ActionIndex += 1;
-            acttionNodes[ActionIndex].ExecuteAction();
+            LineState = LineNodeState.WAITTING;
+            
+            acttionNodes[ActionIndex].OnStoryUpdate();
         }
 
         private void ChangeStep()

@@ -20,6 +20,8 @@ MonoBehaviour:
   - rid: 4305183053619134793
   - rid: 4305183053619134795
   - rid: 4305183053619134796
+  - rid: 4305183053619134821
+  - rid: 4305183053619134880
   edges:
   - GUID: 63c14ed9-9ff3-4ed9-9fce-eb5512c39289
     owner: {fileID: 11400000}
@@ -61,6 +63,22 @@ MonoBehaviour:
     outputFieldName: actions
     inputPortIdentifier: 
     outputPortIdentifier: 
+  - GUID: 702f7deb-8e75-4aa3-a84a-8060482b0865
+    owner: {fileID: 11400000}
+    inputNodeGUID: 01f02936-b0cc-4552-b773-7e541865d9da
+    outputNodeGUID: bb6709f6-39eb-4a82-9c21-8ffebdaab92d
+    inputFieldName: line
+    outputFieldName: actions
+    inputPortIdentifier: 
+    outputPortIdentifier: 
+  - GUID: 5912cd61-3336-40de-a8b0-1bd105a8f263
+    owner: {fileID: 11400000}
+    inputNodeGUID: 84a738a0-7a9c-4f0b-9bd2-5fa800779a06
+    outputNodeGUID: 52a6ad22-4503-4af9-9649-689518a332b8
+    inputFieldName: preStep
+    outputFieldName: nextStep
+    inputPortIdentifier: 
+    outputPortIdentifier: 
   groups: []
   stackNodes: []
   pinnedElements: []
@@ -68,8 +86,8 @@ MonoBehaviour:
   serializedParameterList: []
   stickyNotes: []
   nodeInspectorReference: {fileID: 0}
-  position: {x: -165, y: 27.5, z: 0}
-  scale: {x: 1, y: 1, z: 1}
+  position: {x: -36, y: 193, z: 0}
+  scale: {x: 0.7561437, y: 0.7561437, z: 1}
   references:
     version: 2
     RefIds:
@@ -88,6 +106,9 @@ MonoBehaviour:
         expanded: 1
         debug: 0
         nodeLock: 0
+        CurrentStoryStep: 39e8c9db-61f9-4f0e-af5e-661f578960d5
+        CurrentStoryLine: 
+        State: 0
     - rid: 4305183053619134790
       type: {class: StoryLine4Current, ns: StoryEditor.Nodes, asm: Assembly-CSharp}
       data:
@@ -97,12 +118,15 @@ MonoBehaviour:
         position:
           serializedVersion: 2
           x: 459
-          y: 40
+          y: 41.322514
           width: 162
           height: 75
         expanded: 0
         debug: 0
         nodeLock: 0
+        listenType: 0
+        ActionIndex: -1
+        LineState: 0
     - rid: 4305183053619134791
       type: {class: StoryAction4Dialogue, ns: StoryEditor.Nodes, asm: Assembly-CSharp}
       data:
@@ -111,14 +135,14 @@ MonoBehaviour:
         computeOrder: 2
         position:
           serializedVersion: 2
-          x: 675
-          y: 40
+          x: 811.27515
+          y: -275.4857
           width: 274
           height: 178.5
         expanded: 0
         debug: 0
         nodeLock: 0
-        dialogueContent: "\u4F60\u597D\u5440"
+        dialogueContent: "\u9F99\u5E74\u8D77"
         speakerAvatar: {fileID: 0}
         speakerName: A
     - rid: 4305183053619134793
@@ -130,7 +154,7 @@ MonoBehaviour:
         position:
           serializedVersion: 2
           x: 459
-          y: 407.75
+          y: 408.00003
           width: 226
           height: 118.5
         expanded: 0
@@ -152,6 +176,9 @@ MonoBehaviour:
         expanded: 0
         debug: 0
         nodeLock: 0
+        listenType: 0
+        ActionIndex: -1
+        LineState: 0
     - rid: 4305183053619134796
       type: {class: StoryAction4Dialogue, ns: StoryEditor.Nodes, asm: Assembly-CSharp}
       data:
@@ -160,8 +187,8 @@ MonoBehaviour:
         computeOrder: 5
         position:
           serializedVersion: 2
-          x: 931
-          y: 254.5
+          x: 1135
+          y: 229.5
           width: 274
           height: 178.5
         expanded: 0
@@ -170,3 +197,36 @@ MonoBehaviour:
         dialogueContent: "\u4F60\u597D\u54402"
         speakerAvatar: {fileID: 0}
         speakerName: B
+    - rid: 4305183053619134821
+      type: {class: StoryAction4Dialogue, ns: StoryEditor.Nodes, asm: Assembly-CSharp}
+      data:
+        nodeCustomName: 
+        GUID: 01f02936-b0cc-4552-b773-7e541865d9da
+        computeOrder: 6
+        position:
+          serializedVersion: 2
+          x: 830
+          y: -40.499992
+          width: 274
+          height: 178.5
+        expanded: 0
+        debug: 0
+        nodeLock: 0
+        dialogueContent: "\u65B0\u5F81\u7A0B"
+        speakerAvatar: {fileID: 0}
+        speakerName: 
+    - rid: 4305183053619134880
+      type: {class: StoryStep4End, ns: StoryEditor.Nodes, asm: Assembly-CSharp}
+      data:
+        nodeCustomName: 
+        GUID: 84a738a0-7a9c-4f0b-9bd2-5fa800779a06
+        computeOrder: 7
+        position:
+          serializedVersion: 2
+          x: 714.75
+          y: 683.5
+          width: 193.5
+          height: 75
+        expanded: 1
+        debug: 0
+        nodeLock: 0

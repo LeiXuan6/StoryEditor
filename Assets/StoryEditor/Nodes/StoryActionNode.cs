@@ -48,11 +48,6 @@ namespace StoryEditor.Nodes
         {
             return null;
         }
-
-        public virtual bool ExecuteAction()
-        {
-            return true;
-        }
     }
 
     [System.Serializable, NodeMenuItem("Story/DialogueAction")]

@@ -62,6 +62,11 @@ namespace StoryEditor.Nodes
         {
             GUID = ++ID_GEN;
             this.storyRunner = storyRunner;
+            
+            storyNodes = new Dictionary<string, StoryBaseNode>();
+            step2Lines = new Dictionary<string, List<StoryLineNode>>();
+            line2Actions = new Dictionary<string, List<StoryActionNode>>();
+            
             InitStoryProcessor(graph);
         }
 
@@ -77,7 +82,7 @@ namespace StoryEditor.Nodes
         {
             if(storyNodes.TryGetValue(StartNode.CurrentStoryLine, out StoryBaseNode lineNode))
             {
-                ((StoryLineNode)lineNode).OnProcess();
+                ((StoryLineNode)lineNode).OnStoryUpdate();
             }
         }
         
@@ -106,9 +111,7 @@ namespace StoryEditor.Nodes
             StartNode.StoryRunner = this.storyRunner;
             StartNode.Processor = this;
             
-            storyNodes = new Dictionary<string, StoryBaseNode>();
-            step2Lines = new Dictionary<string, List<StoryLineNode>>();
-            line2Actions = new Dictionary<string, List<StoryActionNode>>();
+            
             InitStoryData();
 
             string currentStoryStep = StartNode.CurrentStoryStep;
@@ -140,25 +143,33 @@ namespace StoryEditor.Nodes
             while (current != null)
             {
                 IEnumerable<IStoryNode> lineExecutedNodes = current.GetExecutedNodes();
-                List<StoryLineNode> lines = new List<StoryLineNode>();
-                step2Lines.Add(current.GUID, lines);
-
-                foreach (StoryLineNode executedNode in lineExecutedNodes)
+                if (lineExecutedNodes != null)
                 {
-                    lines.Add(executedNode);
                     
-                    executedNode.StoryContext = StartNode;
-                    executedNode.Step = current;
-                        
-                    IEnumerable<IStoryNode> actionExecutedNodes = executedNode.GetExecutedNodes();
-                    List<StoryActionNode> actionList = new List<StoryActionNode>();
-                    line2Actions.Add(executedNode.GUID, actionList);
-                    foreach (StoryActionNode action in actionExecutedNodes)
-                    {
-                        actionList.Add(action);
-                    }
-                }
+                    List<StoryLineNode> lines = new List<StoryLineNode>();
+                    step2Lines.Add(current.GUID, lines);
 
+                    foreach (StoryLineNode executedNode in lineExecutedNodes)
+                    {
+                        lines.Add(executedNode);
+                    
+                        executedNode.StoryContext = StartNode;
+                        executedNode.Step = current;
+                        
+                        IEnumerable<IStoryNode> actionExecutedNodes = executedNode.GetExecutedNodes();
+                        if (actionExecutedNodes != null)
+                        {
+                            List<StoryActionNode> actionList = new List<StoryActionNode>();
+                            line2Actions.Add(executedNode.GUID, actionList);
+                            foreach (StoryActionNode action in actionExecutedNodes)
+                            {
+                                actionList.Add(action);
+                            }
+                        }
+                    }
+
+                }
+                
                 IStoryNode nextStep = current.NextStep();
                 if (nextStep == null)
                 {
@@ -240,7 +251,12 @@ namespace StoryEditor.Nodes
       
         void Update()
         {
+            if (executeQueue.Count == 0)
+            {
+                return;
+            }
             
+            executeQueue[0].Run();
         }
 
         public void RemoveStory(StoryProcessor processor)
