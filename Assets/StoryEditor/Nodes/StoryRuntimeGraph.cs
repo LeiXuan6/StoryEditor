@@ -91,6 +91,11 @@ namespace StoryEditor.Nodes
         {
             foreach (BaseNode baseNode in processList)
             {
+                if (baseNode is ParameterNode)
+                {
+                    baseNode.outputPorts.PushDatas();
+                }
+                
                 if (baseNode is not StoryBaseNode node)
                 {
                     continue;

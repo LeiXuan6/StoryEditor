@@ -29,6 +29,7 @@
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 using StoryEditor.Nodes;
+using UnityEngine;
 
 namespace UIFramework.Scripts.View
 {
@@ -40,16 +41,23 @@ namespace UIFramework.Scripts.View
     public class ScreenStory : ScreenBase
     {
         private UIOpenStoryParameter storyParam;
+        private CtrlStory ctrl;
         public ScreenStory(UIOpenStoryParameter param = null) : base(UIConst.UIStory, param)
         {
-            storyParam = param as UIOpenStoryParameter;
+           
         }
 
         protected override void OnLoadSuccess()
         {
             base.OnLoadSuccess();
-            CtrlStory ctrl = mCtrlBase as CtrlStory;
+            storyParam = mOpenParam as UIOpenStoryParameter;
+            ctrl = mCtrlBase as CtrlStory;
             StoryProcessor storyProcessor = StoryRuntimeGraph.GetInstance().GetStoryProcessor(storyParam.StoryName);
+            ctrl.Backgorund.overrideSprite = storyProcessor.StartNode.Background;
+            if (storyProcessor.StartNode.storyActor != null)
+            {
+                GameObject.Instantiate(storyProcessor.StartNode.storyActor, ctrl.SpeakerAvatarRoot);
+            }
             
         }
     }

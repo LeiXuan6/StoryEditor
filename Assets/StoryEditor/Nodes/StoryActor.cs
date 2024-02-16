@@ -52,6 +52,23 @@ namespace StoryEditor.Nodes
     {
         public string ActorName = "";
         public StoryActorState State = StoryActorState.IDL;
+        private Animator Animator;
+
+        private void Awake()
+        {
+            Animator = GetComponent<Animator>();
+        }
+
+        public void SetState(StoryActorState state)
+        {
+            this.State = state;
+            Play();
+        }
+
+        public void Play()
+        {
+            Animator.Play(State.ToString());
+        }
     }
     
     [System.Serializable]
