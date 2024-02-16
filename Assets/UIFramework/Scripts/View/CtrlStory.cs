@@ -28,10 +28,24 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+using UnityEngine;
+using UnityEngine.UI;
+
 namespace UIFramework.Scripts.View
 {
     public class CtrlStory : UICtrlBase
     {
-        
+        [Header("BG")] 
+        public Image Backgorund;
+
+        [Header("DialogueUI")] 
+        public GameObject DialogueUIRoot;
+        public Transform SpeakerAvatarRoot;
+        public Text SpeakerName;
+
+        [Header("CenterOption")]
+        public GameObject CenterOptionRoot;
+        public GameObject CenterOptionContent;
     }
+    
 }

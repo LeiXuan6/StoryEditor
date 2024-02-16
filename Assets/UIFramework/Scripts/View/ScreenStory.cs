@@ -28,6 +28,8 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+using StoryEditor.Nodes;
+
 namespace UIFramework.Scripts.View
 {
     public class UIOpenStoryParameter : UIOpenScreenParameterBase
@@ -37,11 +39,18 @@ namespace UIFramework.Scripts.View
     
     public class ScreenStory : ScreenBase
     {
+        private UIOpenStoryParameter storyParam;
         public ScreenStory(UIOpenStoryParameter param = null) : base(UIConst.UIStory, param)
         {
+            storyParam = param as UIOpenStoryParameter;
+        }
+
+        protected override void OnLoadSuccess()
+        {
+            base.OnLoadSuccess();
+            CtrlStory ctrl = mCtrlBase as CtrlStory;
+            StoryProcessor storyProcessor = StoryRuntimeGraph.GetInstance().GetStoryProcessor(storyParam.StoryName);
             
         }
-        
-        
     }
 }

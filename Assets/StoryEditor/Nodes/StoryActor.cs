@@ -31,6 +31,7 @@
 using System;
 using GraphProcessor;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace StoryEditor.Nodes
 {
@@ -60,5 +61,14 @@ namespace StoryEditor.Nodes
 
         public override object value { get => val; set => val = (StoryActor)value; }
         public override Type GetValueType() => typeof(StoryActor);
+    }
+    
+    [System.Serializable]
+    public class Image2DParameter : ExposedParameter
+    {
+        [SerializeField] Sprite val;
+
+        public override object value { get => val; set => val = (Sprite)value; }
+        public override Type GetValueType() => typeof(Sprite);
     }
 }

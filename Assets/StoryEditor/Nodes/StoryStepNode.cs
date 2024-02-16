@@ -33,6 +33,7 @@ using System.Linq;
 using GraphProcessor;
 using NodeGraphProcessor.Examples;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace StoryEditor.Nodes
 {
@@ -108,6 +109,7 @@ namespace StoryEditor.Nodes
         public string CurrentStoryLine;
         [ShowInInspector]
         public StoryState State = StoryState.OPEN;
+        public Sprite Background;
         
         public IStoryRunner StoryRunner;
         public StoryProcessor Processor;

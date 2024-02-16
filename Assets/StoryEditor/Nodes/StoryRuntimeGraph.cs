@@ -240,7 +240,13 @@ namespace StoryEditor.Nodes
                 }
             }
         }
- 
+
+        public StoryProcessor GetStoryProcessor(string name)
+        {
+            storyGraphProcessors.TryGetValue(name, out StoryProcessor processor);
+            return processor;
+        }
+         
         public void Trigger(StoryListenType type, StoryListenParam param)
         {
             foreach (KeyValuePair<string,StoryProcessor> kv in storyGraphProcessors)
@@ -251,17 +257,6 @@ namespace StoryEditor.Nodes
                     executeQueue.Add(kv.Value);
                 }
             }
-        }
-
-      
-        void Update()
-        {
-            if (executeQueue.Count == 0)
-            {
-                return;
-            }
-            
-            executeQueue[0].Run();
         }
 
         public void RemoveStory(StoryProcessor processor)
