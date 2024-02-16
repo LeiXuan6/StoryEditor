@@ -32,6 +32,7 @@ using System.Collections.Generic;
 using System.Linq;
 using GraphProcessor;
 using NodeGraphProcessor.Examples;
+using UnityEngine;
 
 namespace StoryEditor.Nodes
 {
@@ -61,13 +62,15 @@ namespace StoryEditor.Nodes
         IStoryUIView GetStoryUIView();
     }
    
-    
+    [System.Serializable]
     public class StoryStepNode : StoryBaseNode
     {
         [Output(name = "Executes", allowMultiple = true)]
         public ConditionalLink	executes;
         [Output(name = "Next Step")]
         public ConditionalLink nextStep;
+        [Input(name = "Story Actor"), ShowAsDrawer]
+        public StoryActor storyActor;
 
         public override IEnumerable<IStoryNode> GetExecutedNodes()
         {

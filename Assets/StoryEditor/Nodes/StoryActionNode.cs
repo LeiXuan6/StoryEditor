@@ -53,10 +53,11 @@ namespace StoryEditor.Nodes
     [System.Serializable, NodeMenuItem("Story/DialogueAction")]
     public class StoryAction4Dialogue : StoryActionNode
     {
+        [Input(name = "Story Actor"), ShowAsDrawer]
+        public StoryActor storyActor;
+        public StoryActorState actorState = StoryActorState.IDL;
         [TextArea] 
         public string dialogueContent;
-        public Sprite speakerAvatar;
-        public string speakerName;
         
         public override string	name => "DialogueAction";
     }

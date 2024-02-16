@@ -233,5 +233,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b7a4949c4d6422595254ecfeb56cb63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  graph: {fileID: 11400000, guid: dbbce9f23b38a4aaca467272b1b4713f, type: 2}
-  assignedGameObject: {fileID: 631226107}

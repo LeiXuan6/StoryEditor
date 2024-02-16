@@ -32,7 +32,7 @@ namespace UIFramework.Scripts.View
 {
     public class UIOpenStoryParameter : UIOpenScreenParameterBase
     {
-        
+        public string StoryName;
     }
     
     public class ScreenStory : ScreenBase
@@ -41,5 +41,7 @@ namespace UIFramework.Scripts.View
         {
             
         }
+        
+        
     }
 }

@@ -45,8 +45,8 @@ namespace StoryEditor.Nodes
     
     public class StoryLineNode : StoryBaseNode
     {
-        [Input(name = "PreStep")]
-        public ConditionalLink	preStep;
+        [Input(name = "Execute")]
+        public ConditionalLink	execute;
         [Output(name = "Actions", allowMultiple = true)]
         public ConditionalLink	actions;
         [ShowInInspector]
@@ -136,5 +136,12 @@ namespace StoryEditor.Nodes
     public class StoryLine4Current : StoryLineNode
     {
         public override string	name => "ImmediatelyExecLine";
+    }
+    
+    [System.Serializable, NodeMenuItem("Story/OptionsExecLine")]
+    public class StoryLine4Option : StoryLineNode
+    {
+        public string OptionaName = "Enter option name";
+        public override string	name => "OptionsExecLine";
     }
 }

@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   serializedNodes: []
   nodes:
-  - id: 0
-  - id: 1
-  - id: 2
-  - id: 3
-  - id: 4
-  - id: 5
-  - id: 6
+  - rid: 0
+  - rid: 1
+  - rid: 2
+  - rid: 3
+  - rid: 4
+  - rid: 5
+  - rid: 6
   edges:
   - GUID: 2bb2c320-a55d-4b23-841e-b8aba69b2e11
     owner: {fileID: 11400000}
@@ -79,7 +79,7 @@ MonoBehaviour:
       y: 58
       width: 150
       height: 200
-    opened: 0
+    opened: 1
     editorType:
       serializedType: GraphProcessor.ExposedParameterView, com.alelievr.NodeGraphProcessor.Editor,
         Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
@@ -96,11 +96,13 @@ MonoBehaviour:
   exposedParameters: []
   serializedParameterList: []
   stickyNotes: []
-  position: {x: 65, y: 64, z: 0}
-  scale: {x: 1, y: 1, z: 1}
+  nodeInspectorReference: {fileID: 0}
+  position: {x: -179.5, y: 22.5, z: 0}
+  scale: {x: 1.3225, y: 1.3225, z: 1}
   references:
-    version: 1
-    00000000:
+    version: 2
+    RefIds:
+    - rid: 0
       type: {class: FloatNode, ns: , asm: Assembly-CSharp}
       data:
         nodeCustomName: 
@@ -117,7 +119,7 @@ MonoBehaviour:
         nodeLock: 0
         output: 0
         input: 0
-    00000001:
+    - rid: 1
       type: {class: FloatNode, ns: , asm: Assembly-CSharp}
       data:
         nodeCustomName: 
@@ -134,7 +136,7 @@ MonoBehaviour:
         nodeLock: 0
         output: 0
         input: 0
-    00000002:
+    - rid: 2
       type: {class: FloatNode, ns: , asm: Assembly-CSharp}
       data:
         nodeCustomName: 
@@ -151,7 +153,7 @@ MonoBehaviour:
         nodeLock: 0
         output: 0
         input: 0
-    00000003:
+    - rid: 3
       type: {class: FloatNode, ns: , asm: Assembly-CSharp}
       data:
         nodeCustomName: 
@@ -168,7 +170,7 @@ MonoBehaviour:
         nodeLock: 0
         output: 0
         input: 0
-    00000004:
+    - rid: 4
       type: {class: FloatNode, ns: , asm: Assembly-CSharp}
       data:
         nodeCustomName: 
@@ -185,7 +187,7 @@ MonoBehaviour:
         nodeLock: 0
         output: 0
         input: 0
-    00000005:
+    - rid: 5
       type: {class: FloatNode, ns: , asm: Assembly-CSharp}
       data:
         nodeCustomName: 
@@ -202,7 +204,7 @@ MonoBehaviour:
         nodeLock: 0
         output: 0
         input: 0
-    00000006:
+    - rid: 6
       type: {class: FloatNode, ns: , asm: Assembly-CSharp}
       data:
         nodeCustomName: 

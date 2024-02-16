@@ -35,6 +35,6 @@ public class Start : MonoBehaviour
 {
     private void Awake()
     {
-        GameUIManager.GetInstance().OpenUI(typeof(ScreenMain));
+        GameUIManager.GetInstance().OpenUI(typeof(ScreenLoading));
     }
 }

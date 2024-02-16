@@ -91,10 +91,15 @@ namespace StoryEditor.Nodes
         {
             foreach (BaseNode baseNode in processList)
             {
-                storyNodes.Add(baseNode.GUID, (StoryBaseNode)baseNode);
-                if (baseNode is StoryStep4Start)
+                if (baseNode is not StoryBaseNode node)
                 {
-                    StartNode = (StoryStep4Start)baseNode;
+                    continue;
+                }
+                
+                storyNodes.Add(node.GUID, node);
+                if (node is StoryStep4Start)
+                {
+                    StartNode = (StoryStep4Start)node;
                 }
             }
             

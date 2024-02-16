@@ -30,8 +30,14 @@
 
 namespace UIFramework.Scripts.View
 {
+    
+    
     public class CtrlMain : UICtrlBase
     {
-        
+        public void EnterP1Story()
+        {
+            UIOpenStoryParameter param = new UIOpenStoryParameter(){StoryName =  "P1"};
+            GameUIManager.GetInstance().OpenUI(typeof(ScreenStory), param);
+        }
     }
 }

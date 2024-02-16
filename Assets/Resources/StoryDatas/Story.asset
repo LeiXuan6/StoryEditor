@@ -18,10 +18,15 @@ MonoBehaviour:
   - rid: 4305183053619134790
   - rid: 4305183053619134791
   - rid: 4305183053619134793
-  - rid: 4305183053619134795
-  - rid: 4305183053619134796
   - rid: 4305183053619134821
   - rid: 4305183053619134880
+  - rid: 4305183210003235064
+  - rid: 4305183210003235070
+  - rid: 4305183210003235073
+  - rid: 4305183210003235074
+  - rid: 4305183210003235075
+  - rid: 4305183210003235097
+  - rid: 4305183210003235106
   edges:
   - GUID: 63c14ed9-9ff3-4ed9-9fce-eb5512c39289
     owner: {fileID: 11400000}
@@ -37,30 +42,6 @@ MonoBehaviour:
     outputNodeGUID: 39e8c9db-61f9-4f0e-af5e-661f578960d5
     inputFieldName: preStep
     outputFieldName: nextStep
-    inputPortIdentifier: 
-    outputPortIdentifier: 
-  - GUID: fc764943-504b-4691-8856-56058afdfdc1
-    owner: {fileID: 11400000}
-    inputNodeGUID: bb6709f6-39eb-4a82-9c21-8ffebdaab92d
-    outputNodeGUID: 39e8c9db-61f9-4f0e-af5e-661f578960d5
-    inputFieldName: preStep
-    outputFieldName: executes
-    inputPortIdentifier: 
-    outputPortIdentifier: 
-  - GUID: a55123a5-71cf-458c-ac6e-533a767e438f
-    owner: {fileID: 11400000}
-    inputNodeGUID: 073f0574-241d-4139-a74a-07840c14d442
-    outputNodeGUID: 52a6ad22-4503-4af9-9649-689518a332b8
-    inputFieldName: preStep
-    outputFieldName: executes
-    inputPortIdentifier: 
-    outputPortIdentifier: 
-  - GUID: 2bc8460b-7173-4318-a910-e82a013a7b4b
-    owner: {fileID: 11400000}
-    inputNodeGUID: 3041cb71-4c24-4511-9f1d-e63b40b79c13
-    outputNodeGUID: 073f0574-241d-4139-a74a-07840c14d442
-    inputFieldName: line
-    outputFieldName: actions
     inputPortIdentifier: 
     outputPortIdentifier: 
   - GUID: 702f7deb-8e75-4aa3-a84a-8060482b0865
@@ -79,15 +60,91 @@ MonoBehaviour:
     outputFieldName: nextStep
     inputPortIdentifier: 
     outputPortIdentifier: 
+  - GUID: 03059d63-5b29-4f9a-b490-6200ca031123
+    owner: {fileID: 11400000}
+    inputNodeGUID: 39e8c9db-61f9-4f0e-af5e-661f578960d5
+    outputNodeGUID: 346b05a8-0f64-4150-849a-fb1b133b535f
+    inputFieldName: storyActor
+    outputFieldName: output
+    inputPortIdentifier: 
+    outputPortIdentifier: output
+  - GUID: 04cef969-b370-4238-b214-3c3d24b26b45
+    owner: {fileID: 11400000}
+    inputNodeGUID: bb6709f6-39eb-4a82-9c21-8ffebdaab92d
+    outputNodeGUID: 39e8c9db-61f9-4f0e-af5e-661f578960d5
+    inputFieldName: execute
+    outputFieldName: executes
+    inputPortIdentifier: 
+    outputPortIdentifier: 
+  - GUID: b65a58f9-50f0-4400-baa3-c5a84c469596
+    owner: {fileID: 11400000}
+    inputNodeGUID: 02aaa029-4653-4b99-bc3b-50cad236c007
+    outputNodeGUID: 52a6ad22-4503-4af9-9649-689518a332b8
+    inputFieldName: execute
+    outputFieldName: executes
+    inputPortIdentifier: 
+    outputPortIdentifier: 
+  - GUID: 83923f75-bd07-49f7-b2f6-4421ec282447
+    owner: {fileID: 11400000}
+    inputNodeGUID: 5b053131-1419-4d5c-b957-d7c31ee9dccf
+    outputNodeGUID: 52a6ad22-4503-4af9-9649-689518a332b8
+    inputFieldName: execute
+    outputFieldName: executes
+    inputPortIdentifier: 
+    outputPortIdentifier: 
+  - GUID: 120ab09e-af8c-4c85-874d-1a9f7f242a43
+    owner: {fileID: 11400000}
+    inputNodeGUID: 556c642c-cad2-4bbc-bda4-0e48d495fac4
+    outputNodeGUID: 52a6ad22-4503-4af9-9649-689518a332b8
+    inputFieldName: execute
+    outputFieldName: executes
+    inputPortIdentifier: 
+    outputPortIdentifier: 
+  - GUID: 50a90ae8-246c-474d-b7b8-7ec566f03c9d
+    owner: {fileID: 11400000}
+    inputNodeGUID: d5611768-45f1-4b87-a81a-138143bcd685
+    outputNodeGUID: 52a6ad22-4503-4af9-9649-689518a332b8
+    inputFieldName: execute
+    outputFieldName: executes
+    inputPortIdentifier: 
+    outputPortIdentifier: 
+  - GUID: 4bb1df7c-a416-4bd4-804b-6c0aa941699c
+    owner: {fileID: 11400000}
+    inputNodeGUID: 5c1773c3-e293-4893-8592-9b8809824355
+    outputNodeGUID: b9dc207f-61c8-4405-9e51-8a62e9fafd6c
+    inputFieldName: storyActor
+    outputFieldName: output
+    inputPortIdentifier: 
+    outputPortIdentifier: output
+  - GUID: 2bf78367-0191-4d14-b14f-eedfb1e374fe
+    owner: {fileID: 11400000}
+    inputNodeGUID: 01f02936-b0cc-4552-b773-7e541865d9da
+    outputNodeGUID: 0d9ac79d-7047-42fe-a9e1-875b4b0408ec
+    inputFieldName: storyActor
+    outputFieldName: output
+    inputPortIdentifier: 
+    outputPortIdentifier: output
   groups: []
   stackNodes: []
-  pinnedElements: []
-  exposedParameters: []
+  pinnedElements:
+  - position:
+      serializedVersion: 2
+      x: 8
+      y: 4
+      width: 275
+      height: 405
+    opened: 1
+    editorType:
+      serializedType: GraphProcessor.ExposedParameterView, com.alelievr.NodeGraphProcessor.Editor,
+        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  exposedParameters:
+  - rid: 4305183210003235050
+  - rid: 4305183210003235079
   serializedParameterList: []
   stickyNotes: []
   nodeInspectorReference: {fileID: 0}
-  position: {x: -36, y: 193, z: 0}
-  scale: {x: 0.7561437, y: 0.7561437, z: 1}
+  position: {x: -1526, y: -127.5, z: 0}
+  scale: {x: 0.8695652, y: 0.8695652, z: 1}
   references:
     version: 2
     RefIds:
@@ -96,16 +153,17 @@ MonoBehaviour:
       data:
         nodeCustomName: 
         GUID: 39e8c9db-61f9-4f0e-af5e-661f578960d5
-        computeOrder: 0
+        computeOrder: 1
         position:
           serializedVersion: 2
-          x: 338
-          y: 138
-          width: 96
+          x: 2125
+          y: 547.5001
+          width: 184.5
           height: 99
         expanded: 1
         debug: 0
         nodeLock: 0
+        storyActor: {fileID: 0}
         CurrentStoryStep: 39e8c9db-61f9-4f0e-af5e-661f578960d5
         CurrentStoryLine: 
         State: 0
@@ -114,13 +172,13 @@ MonoBehaviour:
       data:
         nodeCustomName: 
         GUID: bb6709f6-39eb-4a82-9c21-8ffebdaab92d
-        computeOrder: 1
+        computeOrder: 2
         position:
           serializedVersion: 2
-          x: 459
-          y: 41.322514
-          width: 162
-          height: 75
+          x: 2382.0007
+          y: 453.0001
+          width: 221
+          height: 94.5
         expanded: 0
         debug: 0
         nodeLock: 0
@@ -132,101 +190,233 @@ MonoBehaviour:
       data:
         nodeCustomName: 
         GUID: 5c1773c3-e293-4893-8592-9b8809824355
-        computeOrder: 2
+        computeOrder: 4
         position:
           serializedVersion: 2
-          x: 811.27515
-          y: -275.4857
-          width: 274
-          height: 178.5
+          x: 2715.8503
+          y: 102
+          width: 219
+          height: 163
         expanded: 0
         debug: 0
         nodeLock: 0
-        dialogueContent: "\u9F99\u5E74\u8D77"
-        speakerAvatar: {fileID: 0}
-        speakerName: A
+        storyActor: {fileID: 0}
+        actorState: 0
+        dialogueContent: "\u4F60\u53EB\u3010\u5B9D\u6708 \u831C\u3011\uFF0C\u662F\u5427\u3002\n\u4F60\u521A\u521A\u8BF4\u4EC0\u4E48\u300A\u79D1\u5B66\u641C\u67E5\u5B98\u300B..."
     - rid: 4305183053619134793
       type: {class: StoryStep4Norm, ns: StoryEditor.Nodes, asm: Assembly-CSharp}
       data:
         nodeCustomName: 
         GUID: 52a6ad22-4503-4af9-9649-689518a332b8
-        computeOrder: 3
+        computeOrder: 5
         position:
           serializedVersion: 2
-          x: 459
-          y: 408.00003
+          x: 2346.8076
+          y: 817.5178
           width: 226
           height: 118.5
         expanded: 0
         debug: 0
         nodeLock: 0
+        storyActor: {fileID: 0}
         stepName: "\u6D4B\u8BD5\u9636\u6BB51"
-    - rid: 4305183053619134795
-      type: {class: StoryLine4Current, ns: StoryEditor.Nodes, asm: Assembly-CSharp}
+    - rid: 4305183053619134821
+      type: {class: StoryAction4Dialogue, ns: StoryEditor.Nodes, asm: Assembly-CSharp}
       data:
         nodeCustomName: 
-        GUID: 073f0574-241d-4139-a74a-07840c14d442
-        computeOrder: 4
+        GUID: 01f02936-b0cc-4552-b773-7e541865d9da
+        computeOrder: 7
         position:
           serializedVersion: 2
-          x: 708
-          y: 254.5
-          width: 162
+          x: 2744.5005
+          y: 371.50003
+          width: 219
+          height: 163
+        expanded: 0
+        debug: 0
+        nodeLock: 0
+        storyActor: {fileID: 0}
+        actorState: 5
+        dialogueContent: "\u662F\u7684\uFF01 \u6CA1\u9519\u3002\n\u600E\u4E48\u4E86\u5417\uFF1F"
+    - rid: 4305183053619134880
+      type: {class: StoryStep4End, ns: StoryEditor.Nodes, asm: Assembly-CSharp}
+      data:
+        nodeCustomName: 
+        GUID: 84a738a0-7a9c-4f0b-9bd2-5fa800779a06
+        computeOrder: 8
+        position:
+          serializedVersion: 2
+          x: 2586.9006
+          y: 1254.0002
+          width: 193.5
           height: 75
+        expanded: 1
+        debug: 0
+        nodeLock: 0
+    - rid: 4305183210003235050
+      type: {class: StoryActorParameter, ns: StoryEditor.Nodes, asm: Assembly-CSharp}
+      data:
+        guid: 02f35f60-f552-405d-befb-c5776bd42345
+        name: Actor-EmaSkye
+        type: 
+        serializedValue:
+          serializedType: 
+          serializedName: 
+          serializedValue: 
+        input: 1
+        settings:
+          rid: 4305183210003235051
+        val: {fileID: 336850111524249556, guid: 74ba00553dfd84dadb3c86dc998f0336, type: 3}
+    - rid: 4305183210003235051
+      type: {class: ExposedParameter/Settings, ns: GraphProcessor, asm: com.alelievr.NodeGraphProcessor.Runtime}
+      data:
+        isHidden: 0
+        expanded: 0
+        guid: 02f35f60-f552-405d-befb-c5776bd42345
+    - rid: 4305183210003235064
+      type: {class: ParameterNode, ns: GraphProcessor, asm: com.alelievr.NodeGraphProcessor.Runtime}
+      data:
+        nodeCustomName: 
+        GUID: 346b05a8-0f64-4150-849a-fb1b133b535f
+        computeOrder: 0
+        position:
+          serializedVersion: 2
+          x: 1981.0908
+          y: 699.4318
+          width: 119.5
+          height: 37
+        expanded: 0
+        debug: 0
+        nodeLock: 0
+        parameterGUID: 02f35f60-f552-405d-befb-c5776bd42345
+        accessor: 0
+    - rid: 4305183210003235070
+      type: {class: StoryLine4Option, ns: StoryEditor.Nodes, asm: Assembly-CSharp}
+      data:
+        nodeCustomName: 
+        GUID: 02aaa029-4653-4b99-bc3b-50cad236c007
+        computeOrder: 9
+        position:
+          serializedVersion: 2
+          x: 2633.0005
+          y: 666.5
+          width: 221
+          height: 114
         expanded: 0
         debug: 0
         nodeLock: 0
         listenType: 0
         ActionIndex: -1
         LineState: 0
-    - rid: 4305183053619134796
-      type: {class: StoryAction4Dialogue, ns: StoryEditor.Nodes, asm: Assembly-CSharp}
+        OptionaName: "\u8C03\u67E5"
+    - rid: 4305183210003235073
+      type: {class: StoryLine4Option, ns: StoryEditor.Nodes, asm: Assembly-CSharp}
       data:
         nodeCustomName: 
-        GUID: 3041cb71-4c24-4511-9f1d-e63b40b79c13
-        computeOrder: 5
+        GUID: 5b053131-1419-4d5c-b957-d7c31ee9dccf
+        computeOrder: 10
         position:
           serializedVersion: 2
-          x: 1135
-          y: 229.5
-          width: 274
-          height: 178.5
+          x: 2633.0005
+          y: 808.2002
+          width: 221
+          height: 114
         expanded: 0
         debug: 0
         nodeLock: 0
-        dialogueContent: "\u4F60\u597D\u54402"
-        speakerAvatar: {fileID: 0}
-        speakerName: B
-    - rid: 4305183053619134821
-      type: {class: StoryAction4Dialogue, ns: StoryEditor.Nodes, asm: Assembly-CSharp}
+        listenType: 0
+        ActionIndex: -1
+        LineState: 0
+        OptionaName: "\u79BB\u5F00\u8FD9\u91CC"
+    - rid: 4305183210003235074
+      type: {class: StoryLine4Option, ns: StoryEditor.Nodes, asm: Assembly-CSharp}
       data:
         nodeCustomName: 
-        GUID: 01f02936-b0cc-4552-b773-7e541865d9da
+        GUID: 556c642c-cad2-4bbc-bda4-0e48d495fac4
+        computeOrder: 11
+        position:
+          serializedVersion: 2
+          x: 2633.0005
+          y: 945.7001
+          width: 273
+          height: 114
+        expanded: 0
+        debug: 0
+        nodeLock: 0
+        listenType: 0
+        ActionIndex: -1
+        LineState: 0
+        OptionaName: "\u4EA4\u8C08"
+    - rid: 4305183210003235075
+      type: {class: StoryLine4Option, ns: StoryEditor.Nodes, asm: Assembly-CSharp}
+      data:
+        nodeCustomName: 
+        GUID: d5611768-45f1-4b87-a81a-138143bcd685
+        computeOrder: 12
+        position:
+          serializedVersion: 2
+          x: 2633.0005
+          y: 1083.5002
+          width: 221
+          height: 114
+        expanded: 0
+        debug: 0
+        nodeLock: 0
+        listenType: 0
+        ActionIndex: -1
+        LineState: 0
+        OptionaName: "\u51FA\u793A"
+    - rid: 4305183210003235079
+      type: {class: StoryActorParameter, ns: StoryEditor.Nodes, asm: Assembly-CSharp}
+      data:
+        guid: f8f61fdd-260f-4d8a-8c71-c1f523a36a51
+        name: Actor-MilesEdgeworth
+        type: 
+        serializedValue:
+          serializedType: 
+          serializedName: 
+          serializedValue: 
+        input: 1
+        settings:
+          rid: 4305183210003235080
+        val: {fileID: 336850111524249556, guid: 85f2cdeb7b7f8444dad3056ab2510e9c, type: 3}
+    - rid: 4305183210003235080
+      type: {class: ExposedParameter/Settings, ns: GraphProcessor, asm: com.alelievr.NodeGraphProcessor.Runtime}
+      data:
+        isHidden: 0
+        expanded: 0
+        guid: f8f61fdd-260f-4d8a-8c71-c1f523a36a51
+    - rid: 4305183210003235097
+      type: {class: ParameterNode, ns: GraphProcessor, asm: com.alelievr.NodeGraphProcessor.Runtime}
+      data:
+        nodeCustomName: 
+        GUID: b9dc207f-61c8-4405-9e51-8a62e9fafd6c
+        computeOrder: 3
+        position:
+          serializedVersion: 2
+          x: 2525.25
+          y: 295.945
+          width: 155.5
+          height: 37
+        expanded: 0
+        debug: 0
+        nodeLock: 0
+        parameterGUID: f8f61fdd-260f-4d8a-8c71-c1f523a36a51
+        accessor: 0
+    - rid: 4305183210003235106
+      type: {class: ParameterNode, ns: GraphProcessor, asm: com.alelievr.NodeGraphProcessor.Runtime}
+      data:
+        nodeCustomName: 
+        GUID: 0d9ac79d-7047-42fe-a9e1-875b4b0408ec
         computeOrder: 6
         position:
           serializedVersion: 2
-          x: 830
-          y: -40.499992
-          width: 274
-          height: 178.5
+          x: 2513.5
+          y: 353.00003
+          width: 119.5
+          height: 37
         expanded: 0
         debug: 0
         nodeLock: 0
-        dialogueContent: "\u65B0\u5F81\u7A0B"
-        speakerAvatar: {fileID: 0}
-        speakerName: 
-    - rid: 4305183053619134880
-      type: {class: StoryStep4End, ns: StoryEditor.Nodes, asm: Assembly-CSharp}
-      data:
-        nodeCustomName: 
-        GUID: 84a738a0-7a9c-4f0b-9bd2-5fa800779a06
-        computeOrder: 7
-        position:
-          serializedVersion: 2
-          x: 714.75
-          y: 683.5
-          width: 193.5
-          height: 75
-        expanded: 1
-        debug: 0
-        nodeLock: 0
+        parameterGUID: 02f35f60-f552-405d-befb-c5776bd42345
+        accessor: 0
